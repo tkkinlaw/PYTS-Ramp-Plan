@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>lesson1</title>
+<title>lesson10</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -14338,7 +14338,7 @@ $(document).ready(function () {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Create-a-standalone-script-that-calls-a-geoprocessing-tool">Create a standalone script that calls a geoprocessing tool<a class="anchor-link" href="#Create-a-standalone-script-that-calls-a-geoprocessing-tool">&#182;</a></h2>
+<h2 id="Share-a-script-tool-in-a-toolbox">Share a script tool in a toolbox<a class="anchor-link" href="#Share-a-script-tool-in-a-toolbox">&#182;</a></h2>
 </div>
 </div>
 </div><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
@@ -14346,10 +14346,9 @@ $(document).ready(function () {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>After running the geoprocessing tool, open the history pane</li>
-<li>Right click the successful run of the tool and select Copy Python command</li>
-<li>Open any text editor and paste the copied Python snippet</li>
-<li>Save the file with a .py extension</li>
+<li>A toolbox (either .tbx or .atbx) is just a file. It can be shared the same as any other file.</li>
+<li>To make sure it works when shared, you must embed the script into the script tool in the toolbox.</li>
+<li>You must also take case that the script contains no hard-coded file paths or other resources that won't be available on other machines.</li>
 </ul>
 
 </div>
@@ -14358,7 +14357,7 @@ $(document).ready(function () {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Run-a-script-from-the-ArcGIS-Pro-Python-window">Run a script from the ArcGIS Pro Python window<a class="anchor-link" href="#Run-a-script-from-the-ArcGIS-Pro-Python-window">&#182;</a></h2>
+<h2 id="Share-a-script-tool-as-a-geoprocessing-package">Share a script tool as a geoprocessing package<a class="anchor-link" href="#Share-a-script-tool-as-a-geoprocessing-package">&#182;</a></h2>
 </div>
 </div>
 </div><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
@@ -14366,10 +14365,47 @@ $(document).ready(function () {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>In ArcGIS Pro, open the Python window</li>
-<li>Right click the prompt and select Load code</li>
-<li>Navigate to the .py file you saved and select it</li>
-<li>Press enter to run the script in the Python window</li>
+<li>The workflow to share a script tool covered in this lesson describes how to create a geoprocessing package.</li>
+<li>Importantly, you cannot share as a geoprocessing package from the Share tab unless you have successfully run the tool at least once</li>
+<li>The package can be output as either a file or a portal item.</li>
+<li>A geoprocessing package portal item does not let you run the tool on the server, it only lets you use the portal's security and sharing model to control who can download the package to their local machine.</li>
+</ul>
+
+</div>
+</div>
+</div><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Key-considerations-for-sharing-a-python-script-tool">Key considerations for sharing a python script tool<a class="anchor-link" href="#Key-considerations-for-sharing-a-python-script-tool">&#182;</a></h2>
+</div>
+</div>
+</div><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Should a geoprocessing tool be used in the script, the user must be able to license that tool. Read <a href="https://pro.arcgis.com/en/pro-app/latest/arcpy/geoprocessing_and_python/accessing-licenses-and-extensions-in-python.htm">this help doc</a> for more.</li>
+<li>The end user must have any python packages used by the script tool installed. </li>
+<li>Arcpy tools can  honor geoprocessing environment settings. If you hard code environment settings in your script, consider if that is helping or hurting the user. Read <a href="https://pro.arcgis.com/en/pro-app/latest/arcpy/geoprocessing_and_python/using-environment-settings.htm">this help doc</a> for more details.</li>
+</ul>
+
+</div>
+</div>
+</div><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Share-a-script-tool-as-a-web-tool">Share a script tool as a web tool<a class="anchor-link" href="#Share-a-script-tool-as-a-web-tool">&#182;</a></h2>
+</div>
+</div>
+</div><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Web tools require ArcGIS Enterprise. You cannot publish a web tool to an ArcGIS Online portal.</li>
+<li>The video explains the process of sharing a web tool to ArcGIS Enterprise.</li>
 </ul>
 
 </div>

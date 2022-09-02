@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>lesson1</title>
+<title>lesson9</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -14338,19 +14338,7 @@ $(document).ready(function () {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Create-a-standalone-script-that-calls-a-geoprocessing-tool">Create a standalone script that calls a geoprocessing tool<a class="anchor-link" href="#Create-a-standalone-script-that-calls-a-geoprocessing-tool">&#182;</a></h2>
-</div>
-</div>
-</div><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>After running the geoprocessing tool, open the history pane</li>
-<li>Right click the successful run of the tool and select Copy Python command</li>
-<li>Open any text editor and paste the copied Python snippet</li>
-<li>Save the file with a .py extension</li>
-</ul>
+<p>This answer uses the Tree Height Calculation tool created in Demo 8.</p>
 
 </div>
 </div>
@@ -14358,22 +14346,52 @@ $(document).ready(function () {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Run-a-script-from-the-ArcGIS-Pro-Python-window">Run a script from the ArcGIS Pro Python window<a class="anchor-link" href="#Run-a-script-from-the-ArcGIS-Pro-Python-window">&#182;</a></h2>
+<h2 id="Dynamically-enable/disable-parameter">Dynamically enable/disable parameter<a class="anchor-link" href="#Dynamically-enable/disable-parameter">&#182;</a></h2>
 </div>
 </div>
-</div><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>In ArcGIS Pro, open the Python window</li>
-<li>Right click the prompt and select Load code</li>
-<li>Navigate to the .py file you saved and select it</li>
-<li>Press enter to run the script in the Python window</li>
-</ul>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># This script disables the Output tree canopies parameter unless the Surface raster parameter is set to nDSM.tif</span>
+
+<span class="k">class</span> <span class="nc">ToolValidator</span><span class="p">:</span>
+  <span class="c1"># Class to add custom behavior and properties to the tool and tool parameters.</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># set self.params for use in other function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">arcpy</span><span class="o">.</span><span class="n">GetParameterInfo</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">initializeParameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Customize parameter properties. </span>
+        <span class="c1"># This gets called when the tool is opened.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">updateParameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Modify parameter values and properties.</span>
+        <span class="c1"># This gets called each time a parameter is modified, before </span>
+        <span class="c1"># standard validation.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">valueAsText</span> <span class="o">==</span> <span class="s1">&#39;nDSM.tif&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">enabled</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">updateMessages</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Customize messages for the parameters.</span>
+        <span class="c1"># This gets called after standard validation.</span>
+        <span class="k">return</span>
+
+    <span class="c1"># def isLicensed(self):</span>
+    <span class="c1">#     # set tool isLicensed.</span>
+    <span class="c1"># return True</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
+
 </div>
     </div>
   </div>

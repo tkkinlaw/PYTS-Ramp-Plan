@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>lesson1</title>
+<title>lesson8</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -14338,19 +14338,7 @@ $(document).ready(function () {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Create-a-standalone-script-that-calls-a-geoprocessing-tool">Create a standalone script that calls a geoprocessing tool<a class="anchor-link" href="#Create-a-standalone-script-that-calls-a-geoprocessing-tool">&#182;</a></h2>
-</div>
-</div>
-</div><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>After running the geoprocessing tool, open the history pane</li>
-<li>Right click the successful run of the tool and select Copy Python command</li>
-<li>Open any text editor and paste the copied Python snippet</li>
-<li>Save the file with a .py extension</li>
-</ul>
+<p>There are many different possible ways to answer this challenge. The answers below use the completed ConvertShapefiles demo.</p>
 
 </div>
 </div>
@@ -14358,7 +14346,77 @@ $(document).ready(function () {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Run-a-script-from-the-ArcGIS-Pro-Python-window">Run a script from the ArcGIS Pro Python window<a class="anchor-link" href="#Run-a-script-from-the-ArcGIS-Pro-Python-window">&#182;</a></h2>
+<h2 id="Changes-to-script">Changes to script<a class="anchor-link" href="#Changes-to-script">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Code from completed demo</span>
+
+<span class="kn">import</span> <span class="nn">arcpy</span>
+
+<span class="n">arcpy</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">workspace</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\EsriTraining\PYTS\Demodata\SANDAG\Ecology&quot;</span>
+<span class="n">outWrk</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\EsriTraining\PYTS\Demodata\SanDiego.gdb&quot;</span>
+
+<span class="n">fcList</span> <span class="o">=</span> <span class="n">arcpy</span><span class="o">.</span><span class="n">ListFeatureClasses</span><span class="p">()</span>
+
+<span class="n">fcNum</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fcList</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">fcNum</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">fcNum</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">fc</span> <span class="ow">in</span> <span class="n">fcList</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span>
+        <span class="n">newName</span> <span class="o">=</span> <span class="n">fc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.shp&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="n">arcpy</span><span class="o">.</span><span class="n">FeatureClassToFeatureClass_conversion</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span><span class="n">outWrk</span><span class="p">,</span><span class="n">newName</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Script tool code changes</span>
+
+<span class="kn">import</span> <span class="nn">arcpy</span>
+
+<span class="c1"># replace hard-coded file paths with functions to get user input</span>
+<span class="n">arcpy</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">workspace</span> <span class="o">=</span> <span class="n">arcpy</span><span class="o">.</span><span class="n">GetParameterAsText</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">outWrk</span> <span class="o">=</span> <span class="n">arcpy</span><span class="o">.</span><span class="n">GetParameterAsText</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fcList</span> <span class="o">=</span> <span class="n">arcpy</span><span class="o">.</span><span class="n">ListFeatureClasses</span><span class="p">()</span>
+
+<span class="n">fcNum</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fcList</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">fcNum</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">fcNum</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">fc</span> <span class="ow">in</span> <span class="n">fcList</span><span class="p">:</span>
+        <span class="n">arcpy</span><span class="o">.</span><span class="n">AddMessage</span><span class="p">(</span><span class="n">fc</span><span class="p">)</span> <span class="c1"># no print function inside the GP GUI, use messages instead</span>
+        <span class="n">newName</span> <span class="o">=</span> <span class="n">fc</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.shp&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="n">arcpy</span><span class="o">.</span><span class="n">FeatureClassToFeatureClass_conversion</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span><span class="n">outWrk</span><span class="p">,</span><span class="n">newName</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Script-tool-configuration">Script tool configuration<a class="anchor-link" href="#Script-tool-configuration">&#182;</a></h2>
 </div>
 </div>
 </div><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
@@ -14366,10 +14424,11 @@ $(document).ready(function () {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>In ArcGIS Pro, open the Python window</li>
-<li>Right click the prompt and select Load code</li>
-<li>Navigate to the .py file you saved and select it</li>
-<li>Press enter to run the script in the Python window</li>
+<li>To start a script tool, right-click a toolbox and select New &gt; Script</li>
+<li>On the General tab, give the script tool a name (no spaces) and a label (spaces ok)</li>
+<li>On the Execution tab, load the .py script file. You can continue editing the script file after associating it with the script tool</li>
+<li>On the Parameters tab, configure the parameters tab. In this case, we need just input and output workspace parameters, configured as follows:
+<img src="data:image/png;base64,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" alt="Lesson8Parameters.png"></li>
 </ul>
 
 </div>
