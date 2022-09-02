@@ -14331,14 +14331,7 @@ $(document).ready(function () {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Challenge-Answers">Challenge Answers<a class="anchor-link" href="#Challenge-Answers">&#182;</a></h1>
-</div>
-</div>
-</div><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>There are many different ways to answer this challenge. Below is one response that shows how the cursor workflow in Lesson 5 can be done with a single cursor. It is not necessary to use both SearchCursor and UpdateCursor</p>
+<h1 id="Challenge-Answers">Challenge Answers<a class="anchor-link" href="#Challenge-Answers">&#182;</a></h1><p>There are many different ways to answer this challenge. Below is one response that shows how the cursor workflow in Lesson 5 can be done with a single cursor. It is not necessary to use both SearchCursor and UpdateCursor.</p>
 
 </div>
 </div>
@@ -14355,7 +14348,8 @@ $(document).ready(function () {
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="n">fc</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\EsriTraining\PYTS\Data\CountyData.gdb\ParcelPts&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">arcpy</span> 
+<span class="n">fc</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\EsriTraining\PYTS\Data\CountyData.gdb\ParcelPts&quot;</span>
 <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TaxValue&#39;</span><span class="p">,</span> <span class="s1">&#39;SquFoot&#39;</span><span class="p">,</span> <span class="s1">&#39;PriceSquFt&#39;</span><span class="p">]</span>
 <span class="n">exp</span> <span class="o">=</span> <span class="s2">&quot;TaxValue / SquFoot &lt; 90&quot;</span>
 <span class="k">with</span> <span class="n">arcpy</span><span class="o">.</span><span class="n">da</span><span class="o">.</span><span class="n">UpdateCursor</span><span class="p">(</span><span class="n">fc</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span> <span class="k">as</span> <span class="n">sCursor</span><span class="p">:</span>
